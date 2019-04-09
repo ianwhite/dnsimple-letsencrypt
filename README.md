@@ -4,7 +4,7 @@ These 2 bash scripts help in obtaining and renewing Letsencrypt SSL certs for do
 
 It is not necessary to install certbot, as we use the docker images for these
 
-These script only obtain the certificates, and do not configure your webserver.
+These scripts only obtain the certificates, and do not configure your webserver.
 
 ## Requirements
 
@@ -30,9 +30,9 @@ These script only obtain the certificates, and do not configure your webserver.
 
 Once it's all working setup your cron script as follows (here assuming you're using nginx)
 
-   sudo crontab -e
+    sudo crontab -e
 
 And add a line like the following (replace /PATH/TO and the contents of the renew hook)
    
-   6 1,13 * * * /PATH/TO/dnsimple-letsencrypt/renew-all-certs --renew-hook "service nginx restart"
+    6 1,13 * * * /PATH/TO/dnsimple-letsencrypt/renew-all-certs --renew-hook "service nginx restart"
 
