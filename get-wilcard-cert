@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+  echo "Usage: $0 domain.name"
+  echo
+  echo "Only specify a root domain, eg. boombeam.io"
+  echo
+  exit 1
+fi
+
+SECRET="/etc/letsencrypt/secrets/dnsimple.ini"
+
+if [ ! -e "$SECRET" ] ; then
+  echo "Go to dnsimple and get an API key and place it in $SECRET"
+  echo
+  echo "sudo mkdir -p $(dirname "$SECRET")"
+  echo 
+  echo "It should have contents like this:"
+  echo "dns_dnsimple_token = YOURTOKEN"
+  exit 1
+fi
+
+sudo docker run -it --rm --name certbot \
+  -v "/etc/letsencrypt:/etc/letsencrypt" \
+  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+  certbot/dns-dnsimple certonly \
+  -a dns-dnsimple \
+  --dns-dnsimple-credentials="$SECRET" \
+  --dns-dnsimple-propagation-seconds=60 \
+  -d $1 \
+  -d "*.$1" \
+  --server https://acme-v02.api.letsencrypt.org/directory \
+  "${@:2}"
