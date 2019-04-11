@@ -3,5 +3,4 @@
 sudo docker run -it --rm --name certbot \
   -v "/etc/letsencrypt:/etc/letsencrypt" \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-  -v "/usr/sbin/service:/usr/sbin/service" \
   certbot/dns-dnsimple renew "$@"
