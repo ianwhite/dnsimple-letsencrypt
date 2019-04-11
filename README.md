@@ -2,7 +2,7 @@
 
 These 2 bash scripts help in obtaining and renewing Letsencrypt SSL certs for domains managed by dnsimple
 
-It is not necessary to install certbot, as we use the docker images for these
+It is not necessary to install certbot, or any plugins, as we use the official docker images for these.
 
 These scripts only obtain the certificates, and do not configure your webserver.
 
@@ -15,7 +15,10 @@ These scripts only obtain the certificates, and do not configure your webserver.
 
     git clone https://github.com/ianwhite/dnsimple-letsencrypt .
     
-    # to obatin a wildcard cert
+    # to obtain a cert
+    sudo dnsimple-letsencrypt/get-cert your.domain
+    
+    # to obtain a wildcard cert
     sudo dnsimple-letsencrypt/get-wildcard-cert your.domain
 
     # follow the instuctions to place the API key in the specified directory
