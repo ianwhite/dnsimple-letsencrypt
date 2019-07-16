@@ -16,8 +16,7 @@ These scripts only obtain the certificates, and do not configure your webserver.
 
 ### certbot-dns-dnsimple
 
-    sudo sudo apt-get install python-pip
-    sudo pip install certbot-dns-dnsimple
+    sudo apt-get install python3-certbot-dns-dnsimple
 
 ### dnsimple API key
 
