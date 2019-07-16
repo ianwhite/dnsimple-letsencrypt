@@ -14,20 +14,17 @@ if [ ! -e "$SECRET" ] ; then
   echo "Go to dnsimple and get an API key and place it in $SECRET"
   echo
   echo "sudo mkdir -p $(dirname "$SECRET")"
-  echo 
+  echo
   echo "It should have contents like this:"
   echo "dns_dnsimple_token = YOURTOKEN"
   exit 1
 fi
 
-sudo docker run -it --rm --name certbot \
-  -v "/etc/letsencrypt:/etc/letsencrypt" \
-  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-  certbot/dns-dnsimple certonly \
-  -a dns-dnsimple \
-  --dns-dnsimple-credentials="$SECRET" \
-  --dns-dnsimple-propagation-seconds=60 \
-  -d $1 \
-  -d "*.$1" \
-  --server https://acme-v02.api.letsencrypt.org/directory \
-  "${@:2}"
+sudo certbot certonly \
+             -a dns-dnsimple \
+             --dns-dnsimple-credentials="$SECRET" \
+             --dns-dnsimple-propagation-seconds=60 \
+             -d $1 \
+             -d "*.$1" \
+             --server https://acme-v02.api.letsencrypt.org/directory \
+             "${@:2}"
