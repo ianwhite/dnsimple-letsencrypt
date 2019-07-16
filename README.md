@@ -12,7 +12,7 @@ These scripts only obtain the certificates, and do not configure your webserver.
 
     sudo add-apt-repository ppa:certbot/certbot
     sudo apt-get update
-    sudo apt-get install python-certbot-nginx
+    sudo apt-get install certbot python3-certbot-nginx
 
 ### certbot-dns-dnsimple
 
@@ -47,6 +47,6 @@ Once it's all working setup your cron script as follows (here assuming you're us
     sudo crontab -e
 
 And add a line like the following (replace /PATH/TO and the contents of the renew hook)
+6 1,13 * * * certbot renew --renew-hook "service nginx restart"
 
-    6 1,13 * * * certbot renew --renew-hook "service nginx restart"
 
